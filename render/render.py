@@ -210,7 +210,6 @@ def render_mesh(
             if antialias:
                 accum = dr.antialias(accum.contiguous(), rast, v_pos_clip, mesh.t_pos_idx.int())
         return accum
-
     assert mesh.t_pos_idx.shape[0] > 0, "Got empty training triangle mesh (unrecoverable discontinuity)"
     assert background is None or (background.shape[1] == resolution[0] and background.shape[2] == resolution[1])
 
