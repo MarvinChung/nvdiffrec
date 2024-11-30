@@ -110,13 +110,26 @@ def generate_transforms_json(scannet_scene_path, output_path):
         if pose.shape != (4, 4):
             raise ValueError("Pose matrix must be a 4x4 matrix")
         
-        # Assume pose is c2w
+        # Scannet is c2w
         c2w = pose #np.linalg.inv(pose)
 
+        # # colmap transform (not for our mesh)
+        # c2w[0:3,2] *= -1 # flip the y and z axis
+        # c2w[0:3,1] *= -1
+        # c2w = c2w[[1,0,2,3],:]
+        # c2w[2,:] *= -1 # flip whole world upside down
+
+        # # My transform 
+        c2w[0:3,0] *= -1
         c2w[0:3,2] *= -1 # flip the y and z axis
         c2w[0:3,1] *= -1
         c2w = c2w[[1,0,2,3],:]
-        c2w[2,:] *= -1 # flip whole world upside down
+
+        # My transform 
+        # c2w[0:3,0] *= -1
+        # c2w[0:3,2] *= -1 # flip the y and z axis
+        # c2w[0:3,1] *= -1
+        # c2w = c2w[[1,0,2,3],:]
 
         # Convert to list for JSON serialization
         transform_matrix = c2w.tolist()
