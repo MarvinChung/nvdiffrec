@@ -1,5 +1,5 @@
 {
-    "base_mesh": "/home/marvin/Desktop/Github/MeshFromDepth/DistDepth/output_no_downsample/scene0241_01_output_no_downsample_mesh.obj",
+    "base_mesh": "/home/marvin/Desktop/Github/MeshFromDepth/DistDepth/output_no_downsample/scene0241_01_no_downsample_mesh.obj",
     "ref_mesh": "/home/marvin/Desktop/dataset/scannet0241/scene0241_01/exported",
     "random_textures": true,
     "iter": 5000,
