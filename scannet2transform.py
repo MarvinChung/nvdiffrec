@@ -93,6 +93,7 @@ def generate_transforms_json(scannet_scene_path, output_path):
     os.makedirs(resized_folder, exist_ok=True)
 
     # Iterate over images and poses
+    ct = 0
     for image_filename in tqdm.tqdm(image_files, desc='Processing images'):
         src_image_path = os.path.join(color_folder, image_filename)
         idx = os.path.splitext(image_filename)[0]
@@ -119,17 +120,16 @@ def generate_transforms_json(scannet_scene_path, output_path):
         # c2w = c2w[[1,0,2,3],:]
         # c2w[2,:] *= -1 # flip whole world upside down
 
-        # # My transform 
-        c2w[0:3,0] *= -1
-        c2w[0:3,2] *= -1 # flip the y and z axis
-        c2w[0:3,1] *= -1
-        c2w = c2w[[1,0,2,3],:]
-
         # My transform 
         # c2w[0:3,0] *= -1
         # c2w[0:3,2] *= -1 # flip the y and z axis
         # c2w[0:3,1] *= -1
         # c2w = c2w[[1,0,2,3],:]
+
+        # For 2d gaussain
+        # It change from OpenGL/Blender camera axes (Y up, Z back) to COLMAP (Y down, Z forward)
+        # but we don't need it, so we cancel that operation
+        c2w[:3, 1:3] *= -1
 
         # Convert to list for JSON serialization
         transform_matrix = c2w.tolist()
@@ -150,6 +150,9 @@ def generate_transforms_json(scannet_scene_path, output_path):
             "transform_matrix": transform_matrix
         }
         transforms["frames"].append(frame)
+        ct += 1
+        # if ct > 1:
+        #     break
 
     # Save transforms.json
     with open(output_path, 'w') as f:

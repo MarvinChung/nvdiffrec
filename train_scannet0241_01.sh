@@ -1,0 +1,1 @@
+python3 train.py --config ./configs/nerf_scannet0241_01.json

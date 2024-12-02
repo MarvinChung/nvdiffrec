@@ -1,8 +1,8 @@
 {
-    "base_mesh": "/home/marvin/Desktop/Github/DistDepth/output_gt/scene0241_01_gt_mesh.obj",
+    "base_mesh": "/home/marvin/Desktop/Github/MeshFromDepth/DistDepth/output_no_downsample/scene0241_01_output_no_downsample_mesh.obj",
     "ref_mesh": "/home/marvin/Desktop/dataset/scannet0241/scene0241_01/exported",
     "random_textures": true,
-    "iter": 100,
+    "iter": 5000,
     "save_interval": 100,
     "texture_res": [ 2048, 2048 ],
     "train_res": [468, 624],
@@ -16,5 +16,5 @@
     "background" : "white",
     "out_dir": "nerf_scannet0241_01",
     "lock_light": true,
-    "lock_pos": true
+    "lock_pos": false
 }
